@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@import "primeicons/primeicons.css";
+@import "tailwindcss";
+@import "tailwindcss-primeui";
 
 /* 👇 Aquí van tus fuentes */
 @font-face {
