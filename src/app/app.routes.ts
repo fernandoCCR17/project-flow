@@ -4,5 +4,9 @@ export const routes: Routes = [
     {
         path: "",
         loadChildren: () => import("./features/public/public.routes")
+    },
+    {
+        path: "**",
+        redirectTo: ""
     }
 ];
