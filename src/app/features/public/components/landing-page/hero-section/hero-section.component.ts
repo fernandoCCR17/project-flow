@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MessageComponent } from "@shared/ui/button/message/message.component";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'hero-section',
-  imports: [],
+  imports: [MessageComponent, RouterLink],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

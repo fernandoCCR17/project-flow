@@ -1,0 +1,9 @@
+<p-message [severity]="severity()" class='{{classes()}}'>
+
+  <ng-template #icon>
+    <ng-content select="[messageIcon]"></ng-content>
+  </ng-template>
+
+  <ng-content></ng-content>
+
+</p-message>

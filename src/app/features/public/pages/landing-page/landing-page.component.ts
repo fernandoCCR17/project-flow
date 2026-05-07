@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HeroSectionComponent } from "../../components/hero-section/hero-section.component";
-import { AdvantagesSectionComponent } from "../../components/advantages-section/advantages-section.component";
-import { PricingSectionComponent } from "../../components/pricing-section/pricing-section.component";
-import { NavbarSectionComponent } from "../../components/navbar-section/navbar-section.component";
-import { FooterSectionComponent } from "../../components/footer-section/footer-section.component";
+import { HeroSectionComponent } from "../../components/landing-page/hero-section/hero-section.component";
+import { AdvantagesSectionComponent } from "../../components/landing-page/advantages-section/advantages-section.component";
+import { PricingSectionComponent } from "../../components/landing-page/pricing-section/pricing-section.component";
+import { NavbarSectionComponent } from "../../components/landing-page/navbar-section/navbar-section.component";
+import { FooterSectionComponent } from "../../components/landing-page/footer-section/footer-section.component";
 
 @Component({
   selector: 'landing-page',
