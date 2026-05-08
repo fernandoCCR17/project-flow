@@ -1,0 +1,26 @@
+<div class="{{clases()}}">
+    <p-card>
+        <!-- Header -->
+        <ng-template #header>
+            <ng-content select="[cardHeader]"></ng-content>
+        </ng-template>
+        
+        <!-- Title and Subtitle -->
+        <ng-template #title>
+            <ng-content select="[cardTitle]"></ng-content>
+        </ng-template>
+        <ng-template #subtitle>
+            <ng-content select="[cardSubtitle]"></ng-content>
+        </ng-template>
+        
+        <!-- Body -->
+        <ng-template #body>
+            <ng-content select="[cardBody]"></ng-content>
+        </ng-template>
+    
+        <!-- Footer -->
+        <ng-template #footer>
+            <ng-content select="[cardFooter]"></ng-content>
+        </ng-template>
+    </p-card>
+</div>

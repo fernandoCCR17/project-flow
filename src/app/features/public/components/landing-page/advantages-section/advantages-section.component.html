@@ -1,1 +1,21 @@
-<p>advantages-section works!</p>,
+<h2 class="flex flex-col text-center font-bold text-2xl md:text-3xl lg:text-4xl"><span class="text-sm text-blue-700 font-semibold">EVERYTHING YOU NEED</span>Built for Scale and Collaboration</h2>
+
+<div class="flex flex-col gap-5 lg:grid lg:grid-cols-3">
+    @for (item of itemsCards(); track $index) {
+        <app-card [clases]="'w-full'">
+            <div cardHeader>
+                <div class="px-5 pt-5">
+                    <div class="px-3 py-2 rounded-sm bg-blue-200 w-fit">
+                        <i class="pi text-blue-700" [ngClass]="item.icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div cardTitle>
+                <div>
+                    <h2 class="font-semibold text-black">{{item.title}}</h2>
+                    <p class="text-sm mt-2 text-gray-500">{{item.description}}</p>
+                </div>
+            </div>
+        </app-card>
+    }
+</div>
