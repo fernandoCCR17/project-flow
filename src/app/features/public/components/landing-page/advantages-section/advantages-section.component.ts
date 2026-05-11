@@ -1,5 +1,7 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { CardBodyDirective } from '@shared/directives/card/card-body.directive';
+import { CardTitleDirective } from '@shared/directives/card/card-title.directive';
 import { CardComponent } from "@shared/ui/card/card/card.component";
 
 interface itemCard {
@@ -10,7 +12,7 @@ interface itemCard {
 
 @Component({
   selector: 'advantages-section',
-  imports: [CardComponent, NgClass],
+  imports: [CardComponent, NgClass, CardTitleDirective, CardBodyDirective],
   templateUrl: './advantages-section.component.html',
   styleUrl: './advantages-section.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
