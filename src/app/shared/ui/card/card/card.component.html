@@ -1,26 +1,27 @@
-<div class="{{clases()}}">
-    <p-card>
-        <!-- Header -->
-        <ng-template #header>
-            <ng-content select="[cardHeader]"></ng-content>
-        </ng-template>
-        
-        <!-- Title and Subtitle -->
-        <ng-template #title>
-            <ng-content select="[cardTitle]"></ng-content>
-        </ng-template>
-        <ng-template #subtitle>
-            <ng-content select="[cardSubtitle]"></ng-content>
-        </ng-template>
-        
-        <!-- Body -->
-        <ng-template #body>
-            <ng-content select="[cardBody]"></ng-content>
-        </ng-template>
-    
-        <!-- Footer -->
-        <ng-template #footer>
-            <ng-content select="[cardFooter]"></ng-content>
-        </ng-template>
-    </p-card>
-</div>
+<p-card [ngClass]="clases()" [style.background]="background()" [pt]="{ body: { style: { padding: '0', gap: '0' } }, content: { style: { padding: '0' } } }">
+  @if (header) {
+    <ng-template pTemplate="header">
+      <ng-content select="[cardHeader]"></ng-content>
+    </ng-template>
+  }
+  @if (title) {
+    <ng-template pTemplate="title">
+      <ng-content select="[cardTitle]"></ng-content>
+    </ng-template>
+  }
+  @if (subtitle) {
+    <ng-template pTemplate="subtitle">
+      <ng-content select="[cardSubtitle]"></ng-content>
+    </ng-template>
+  }
+  @if (body) {
+    <ng-template pTemplate="content">
+      <ng-content select="[cardBody]"></ng-content>
+    </ng-template>
+  }
+  @if (footer) {
+    <ng-template pTemplate="footer">
+      <ng-content select="[cardFooter]"></ng-content>
+    </ng-template>
+  }
+</p-card>
