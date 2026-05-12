@@ -27,4 +27,12 @@
 
 html, body {
   @apply font-sans;
+
+  scroll-behavior: smooth;
+}
+
+#advantages,
+#pricing,
+#inicio {
+  scroll-margin-top: 150px;
 }

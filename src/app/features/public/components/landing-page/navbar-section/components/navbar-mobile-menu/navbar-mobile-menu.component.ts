@@ -16,5 +16,6 @@ export class NavbarMobileMenuComponent {
 
   close() {
     this.closeMenu.emit();
+    console.log("Hola como estas")
   }
 }
