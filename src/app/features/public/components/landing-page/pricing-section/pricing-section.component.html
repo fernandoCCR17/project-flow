@@ -18,10 +18,10 @@
                 }
 
                 <p 
-                    class="text-3xl text-black font-bold" 
+                    class="text-3xl text-black font-bold md:text-4xl" 
                     [ngClass]="isMostPopular ? 'text-white' : 'text-black'"
                 >
-                ${{itemCard.price}}<span class="text-sm" [ngClass]="isMostPopular ? 'text-gray-200' : 'text-gray-500'">/mo</span>
+                    ${{itemCard.price}}<span class="text-sm md:text-lg" [ngClass]="isMostPopular ? 'text-gray-200' : 'text-gray-500'">/mo</span>
                 </p>
 
                 <button 
