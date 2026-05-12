@@ -1,1 +1,30 @@
-<p>footer-section works!</p>,
+<footer class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-4 gap-3 my-10">
+    <div class="col-start-1 col-end-3 lg:col-end-2 lg:px-4">
+        <div class="flex items-center gap-2 cursor-pointer group mb-2">
+            <div class="w-8 h-8 bg-blue-700 text-black font-bold flex items-center justify-center rounded group-hover:bg-blue-900 transition">
+                <icon-bolt 
+                    [strokeColor]="'#fff'"
+                />
+            </div>
+            <div class="text-base md:text-xl font-bold tracking-tight">Project<span class="text-gray-400">Flow</span></div>
+        </div>
+        
+        <p class="text-sm text-gray-500">Empowering modern teams to build better, together. The centralize hub for all your project needs.</p>
+    </div>
+
+    @for (item of arraySections(); track $index) {
+        <div>
+            <h2 class="font-bold">{{item}}</h2>
+            <ul class="mt-1 text-gray-400 text-sm">
+                @for (itemList of dictionarySections()[item]; track $index) {
+                    <li class="cursor-pointer relative group w-fit">
+                        {{itemList}}
+                        <span
+                            class="absolute left-0 bottom-0 h-[2px] w-0 bg-gray-400 transition-all duration-300 group-hover:w-full">
+                        </span>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</footer>
