@@ -17,8 +17,19 @@
 
         <!-- User Actions -->
         <div class="flex items-center gap-4">
-            <button class="hidden md:block px-4 py-2 text-xs font-semibold hover:bg-blue-900 hover:text-white rounded-full transition cursor-pointer">Login</button>
-            <button class="hidden md:block px-4 py-2 text-xs font-semibold text-white bg-blue-700 rounded-full hover:bg-blue-900 transition cursor-pointer">Get Started</button>
+            <button 
+                class="hidden md:block px-4 py-2 text-xs font-semibold hover:bg-blue-900 hover:text-white rounded-full transition cursor-pointer"
+                routerLink="/auth/login"
+            >
+                Login
+            </button>
+            
+            <button 
+                class="hidden md:block px-4 py-2 text-xs font-semibold text-white bg-blue-700 rounded-full hover:bg-blue-900 transition cursor-pointer"
+                routerLink="/auth/sign-up"
+            >
+                Get Started
+            </button>
 
             <!-- Mobile button -->
             <button 
