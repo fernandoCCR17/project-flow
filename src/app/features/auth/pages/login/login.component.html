@@ -1,1 +1,62 @@
-<p>login works!</p>,
+<div class="mx-auto w-full max-w-[550px] bg-white shadow-lg p-7 rounded-xl border border-gray-200">
+    <h1 class="font-bold text-3xl">Bienvenido de Nuevo</h1>
+    <p class="text-sm text-gray-400 mb-5">Por favor introduzca sus datos para acceder</p>
+
+    <form class="text-sm" [formGroup]="profileForm" (submit)="submit()">
+        <div class="mb-5">
+            <label for="email" class="font-bold mb-3 block text-gray-700">
+                Correo Electrónico
+            </label>
+            <input type="email" name="email" id="email" placeholder="correo@gmail.com"
+                class="w-full rounded-md border border-gray-200 bg-white py-2 px-3 font-medium text-gray-500 outline-none focus:border-blue-700 focus:shadow-md"
+                formControlName="email"
+                [class.border-red-500]="(profileForm.get('email')?.errors && profileForm.get('email')?.touched) ?? false" />
+
+            @if ((profileForm.get('email')?.errors && profileForm.get('email')?.touched) ?? false) {
+            <form-error-label [control]="profileForm.get('email')!"></form-error-label>
+            }
+        </div>
+
+        <div class="mb-5">
+            <div class="flex justify-between">
+                <label for="name" class="font-bold mb-3 block text-gray-700">
+                    Contraseña
+                </label>
+
+                <span class="text-blue-700 cursor-pointer hover:text-blue-900">¿Olvidaste tu contraseña?</span>
+            </div>
+            <input type="password" name="password" id="password" placeholder="*******"
+                class="w-full rounded-md border border-gray-200 bg-white py-2 px-3 font-medium text-gray-500 outline-none focus:border-blue-700 focus:shadow-md"
+                formControlName="password"
+                [class.border-red-500]="(profileForm.get('password')?.errors && profileForm.get('password')?.touched) ?? false" />
+
+            @if ((profileForm.get('password')?.errors && profileForm.get('password')?.touched) ?? false) {
+            <form-error-label [control]="profileForm.get('password')!"></form-error-label>
+            }
+        </div>
+
+        <button
+            class="cursor-pointer w-full rounded-md bg-blue-700 hover:bg-blue-900 py-3 px-8 text-center text-base font-semibold text-white outline-none"
+            [class]="disabledButton()" [disabled]="!profileForm.valid">
+            @if (isLoading()) {
+            <span>
+                <app-spinner />
+                Cargando...
+            </span>
+            }@else {
+            <span>Iniciar Sesión</span>
+            }
+        </button>
+    </form>
+
+    @if(isError()){
+        <app-message [severity]="'error'" [classes]="'w-fit mx-auto mt-5 text-sm'">
+            <span>{{errorMessage}}</span>
+        </app-message>
+    }
+</div>
+
+<p 
+    class="text-gray-500 text-center mt-5 cursor-pointer hover:text-gray-700"
+    routerLink="/auth/sign-up"
+>¿Eres nuevo en ProjectFlow? <span class="text-blue-700 group-hover:text-blue-900">Regístrate</span></p>

@@ -1,0 +1,29 @@
+<div class="relative">
+    <div class="flex justify-center flex-col p-8">
+        <div class="cursor-pointer mx-auto" routerLink="/">
+            <div class="mx-auto w-16 h-16 bg-blue-700 text-black font-bold flex items-center justify-center rounded group-hover:bg-blue-900 transition">
+                <icon-bolt 
+                    [strokeColor]="'#fff'"
+                    [size]="'size-10'"
+                />
+            </div>
+            <div class="text-2xl font-extrabold tracking-tight">ProjectFlow</div>
+        </div>
+
+        <p class="text-center text-gray-400">Simplify your workspace</p>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <button 
+        type="button"
+        class="group cursor-pointer p-2 rounded-full border border-blue-900 hover:bg-blue-900 transition absolute left-0 top-11   "
+        (click)="goBack()"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="size-6 stroke-blue-900 group-hover:stroke-blue-50">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+    </button>
+</div>
+
+

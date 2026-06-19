@@ -7,5 +7,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoltComponent { 
-  strokeColor = input("#000")
+  strokeColor = input("#000");
+  size = input("size-6");
 }
