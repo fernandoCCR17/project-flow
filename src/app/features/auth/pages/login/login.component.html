@@ -1,6 +1,8 @@
 <div class="mx-auto w-full max-w-[550px] bg-white shadow-lg p-7 rounded-xl border border-gray-200">
-    <h1 class="font-bold text-3xl">Bienvenido de Nuevo</h1>
-    <p class="text-sm text-gray-400 mb-5">Por favor introduzca sus datos para acceder</p>
+    <div class="text-center">
+        <h1 class="font-bold text-3xl">Bienvenido de Nuevo</h1>
+        <p class="text-sm text-gray-400 mb-5">Por favor introduzca sus datos para acceder</p>
+    </div>
 
     <form class="text-sm" [formGroup]="profileForm" (submit)="submit()">
         <div class="mb-5">
@@ -52,6 +54,12 @@
     @if(isError()){
         <app-message [severity]="'error'" [classes]="'w-fit mx-auto mt-5 text-sm'">
             <span>{{errorMessage}}</span>
+        </app-message>
+    }
+    
+    @if(isSuccess()){
+        <app-message [severity]="'success'" [classes]="'w-fit mx-auto mt-5 text-sm'">
+            <span>Cuenta creada correctamente</span>
         </app-message>
     }
 </div>
