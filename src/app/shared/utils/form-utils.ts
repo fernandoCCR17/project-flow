@@ -4,6 +4,7 @@ import {
   FormGroup,
   ValidationErrors,
 } from '@angular/forms';
+import { passwordRegex } from '.';
 
 async function sleep() {
   return new Promise((resolve) => {
@@ -19,6 +20,7 @@ export class FormUtils {
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
   static slugPattern = '^[a-z0-9_]+(?:-[a-z0-9_]+)*$';
+  static passwordPattern = `${passwordRegex}`;
 
   static getTextError(errors: ValidationErrors) {
     for (const key of Object.keys(errors)) {
@@ -28,6 +30,9 @@ export class FormUtils {
 
         case 'minlength':
           return `Mínimo de ${errors['minlength'].requiredLength} caracteres.`;
+       
+        case 'maxlength':
+          return `Máximo de ${errors['maxlength'].requiredLength} caracteres.`;
 
         case 'min':
           return `Valor mínimo de ${errors['min'].min}`;
@@ -44,6 +49,10 @@ export class FormUtils {
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
             return 'El valor ingresado no luce como un correo electrónico';
+          }
+          
+          if (errors['pattern'].requiredPattern === FormUtils.passwordPattern) {
+            return 'La contraseña no tiene el formato correcto';
           }
 
           return 'Error de patrón contra expresión regular';

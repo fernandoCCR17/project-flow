@@ -1,1 +1,103 @@
-<p>sign-up works!</p>,
+<div class="mx-auto w-full max-w-[550px] bg-white shadow-lg p-7 rounded-xl border border-gray-200">
+    <div class="text-center">
+        <h1 class="font-bold text-3xl">Create your account</h1>
+        <p class="text-sm text-gray-400 mb-5">Start managing your project efficiently today.</p>
+    </div>
+
+    <form class="text-sm" [formGroup]="registerForm" (submit)="submit()">
+        <div class="md:grid md:grid-cols-2 md:gap-3">
+            <app-input 
+                [control]="registerForm.controls.company"
+                [label]="'Company Name'"
+                [placeholder]="'Acme Corp'"
+                [type]="'text'"
+                [formatFuncion]="FormatUtils.upperCase"
+            />
+
+            <app-input 
+                [control]="registerForm.controls.firstName"
+                [label]="'First Name'"
+                [placeholder]="'Carlos'"
+                [type]="'text'"
+                [formatFuncion]="FormatUtils.camelCase"
+            />
+
+            <app-input 
+                [control]="registerForm.controls.paternalLastName"
+                [label]="'Maternal Last Name'"
+                [placeholder]="'Martinez'"
+                [type]="'text'"
+                [formatFuncion]="FormatUtils.camelCase"
+            />
+            <app-input 
+                [control]="registerForm.controls.maternalLastName"
+                [label]="'Paternal Last Name'"
+                [placeholder]="'Martinez'"
+                [type]="'text'"
+                [formatFuncion]="FormatUtils.camelCase"
+            />
+        </div>
+
+        <app-input 
+            [control]="registerForm.controls.email"
+            [label]="'Email'"
+            [placeholder]="'name@company.com'"
+            [type]="'email'"
+            [formatFuncion]="FormatUtils.textTrim"
+        />
+
+        <div class="md:grid md:grid-cols-2 md:gap-3">
+            <app-input 
+                [control]="registerForm.controls.password"
+                [label]="'Password'"
+                [placeholder]="'*******'"
+                [type]="'password'"
+                [(fieldActive)]="fieldActive"
+                [fieldName]="'password'"
+            />
+
+            <app-input 
+                [control]="registerForm.controls.confirmPassword"
+                [label]="'Confirm Password'"
+                [placeholder]="'*******'"
+                [type]="'password'"
+                [(fieldActive)]="fieldActive"
+                [fieldName]="'confirmPassword'"
+            />
+        </div>
+
+        @if (
+            registerForm.hasError('passwordMismatch') &&
+            registerForm.get('confirmPassword')?.touched
+        ) {
+            <span class="text-red-500 text-sm mt-1">
+                Las contraseñas no coinciden
+            </span>
+        }
+
+        <button
+            class="cursor-pointer w-full rounded-md bg-blue-700 hover:bg-blue-900 py-3 px-8 text-center text-base font-semibold text-white outline-none"
+            [class]="disabledButton()" [disabled]="!registerForm.valid || isLoading()">
+            @if (isLoading()) {
+            <span>
+                <app-spinner />
+                Sending...
+            </span>
+            }@else {
+            <span>Create Account</span>
+            }
+        </button>
+
+        @if(isError()){
+            <app-message [severity]="'error'" [classes]="'w-fit mx-auto mt-5 text-sm'">
+                <span>{{errorMessage}}</span>
+            </app-message>
+        }
+
+        @if (fieldActive()) {
+            <app-password-strength-meter
+                [password]="registerForm.get(fieldActive()!)?.value ?? ''"
+            />
+        }
+    </form>
+</div>
