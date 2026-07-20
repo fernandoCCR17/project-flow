@@ -27,10 +27,23 @@
 
                 <span class="text-blue-700 cursor-pointer hover:text-blue-900">¿Olvidaste tu contraseña?</span>
             </div>
-            <input type="password" name="password" id="password" placeholder="*******"
-                class="w-full rounded-md border border-gray-200 bg-white py-2 px-3 font-medium text-gray-500 outline-none focus:border-blue-700 focus:shadow-md"
-                formControlName="password"
-                [class.border-red-500]="(profileForm.get('password')?.errors && profileForm.get('password')?.touched) ?? false" />
+
+            <div class="relative">
+                <input [type]="!getShowPassword() ? 'password' : 'text'" name="password" id="password" placeholder="*******"
+                    class="w-full rounded-md border border-gray-200 bg-white py-2 px-3 font-medium text-gray-500 outline-none focus:border-blue-700 focus:shadow-md"
+                    formControlName="password"
+                    [class.border-red-500]="(profileForm.get('password')?.errors && profileForm.get('password')?.touched) ?? false" />
+
+                <div class="absolute right-0 top-1/2 -translate-1/2 cursor-pointer">
+                    @if (!getShowPassword()){
+                        <icon-eye (click)="changeTypePassword()"/>
+                    }
+                
+                    @if (getShowPassword()){
+                        <icon-eye-slash (click)="changeTypePassword()"/>
+                    }
+                </div>
+            </div>
 
             @if ((profileForm.get('password')?.errors && profileForm.get('password')?.touched) ?? false) {
             <form-error-label [control]="profileForm.get('password')!"></form-error-label>
@@ -39,10 +52,10 @@
 
         <button
             class="cursor-pointer w-full rounded-md bg-blue-700 hover:bg-blue-900 py-3 px-8 text-center text-base font-semibold text-white outline-none"
-            [class]="disabledButton()" [disabled]="!profileForm.valid">
+            [class]="ButtonUtils.isDisabledButton(!profileForm.valid || isLoading())" [disabled]="!profileForm.valid || this.isLoading()">
             @if (isLoading()) {
             <span>
-                <app-spinner />
+                <icon-spinner />
                 Cargando...
             </span>
             }@else {
@@ -55,12 +68,16 @@
         <app-message [severity]="'error'" [classes]="'w-fit mx-auto mt-5 text-sm'">
             <span>{{errorMessage}}</span>
         </app-message>
-    }
-    
-    @if(isSuccess()){
-        <app-message [severity]="'success'" [classes]="'w-fit mx-auto mt-5 text-sm'">
-            <span>Cuenta creada correctamente</span>
-        </app-message>
+
+        @if (errorMessage === "Para poder acceder debe verificar su cuenta.") {
+            <a
+                class="text-blue-700 mt-2 block text-center cursor-pointer hover:text-blue-900"
+                (click)="handleStateDialogVisible()"
+            >
+                Reenviar código de verificación
+            </a>
+        }
+
     }
 </div>
 
@@ -68,3 +85,5 @@
     class="text-gray-500 text-center mt-5 cursor-pointer hover:text-gray-700"
     routerLink="/auth/sign-up"
 >¿Eres nuevo en ProjectFlow? <span class="text-blue-700 group-hover:text-blue-900">Regístrate</span></p>
+
+<dialog-reenviar-codigo [(visible)]="isDialogVisible"></dialog-reenviar-codigo>

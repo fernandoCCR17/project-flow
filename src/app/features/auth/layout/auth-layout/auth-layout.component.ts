@@ -13,7 +13,7 @@ import { BoltComponent } from "@shared/ui/icons/bolt/bolt.component";
 export class AuthLayoutComponent {
   private readonly location = inject(Location);
 
-   goBack(): void {
+  goBack(): void {
     this.location.back();
   }
 }

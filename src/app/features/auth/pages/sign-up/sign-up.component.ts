@@ -6,15 +6,19 @@ import { RequestEvent, RequestStatus, transition } from '@shared/machine/machine
 import { InputComponent } from "@shared/ui/input/input.component";
 import { PasswordStrengthMeterComponent } from "@shared/ui/password-strength-meter/password-strength-meter.component";
 import { AuthService } from '@features/auth/services/auth.service';
-import { SignupTenantRequest } from '@features/auth/models/signup-tenant-request';
-import { SignupUserRequest } from '@features/auth/models/signup-user-request';
-import { SignupRequest } from '@features/auth/models/signup-request';
-import { MessageComponent } from "@shared/ui/button/message/message.component";
+import { SignupTenantRequest } from '@features/auth/models/request/signup-tenant-request';
+import { SignupUserRequest } from '@features/auth/models/request/signup-user-request';
+import { MessageComponent } from "@shared/ui/message/message.component";
 import { FormatUtils } from '@shared/utils/format-utils';
+import { DialogComponent } from "@shared/ui/dialog/dialog.component";
+import { DialogBodyDirective } from "@shared/directives/dialog/dialog-body.directive";
+import { RouterLink } from '@angular/router';
+import { ButtonUtils } from '@shared/utils/button-utils';
+import { SignupRequest } from '@features/auth/models/request/signup-request';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [SpinnerComponent, ReactiveFormsModule, InputComponent, PasswordStrengthMeterComponent, MessageComponent],
+  imports: [SpinnerComponent, ReactiveFormsModule, InputComponent, PasswordStrengthMeterComponent, MessageComponent, DialogComponent, DialogBodyDirective, RouterLink],
   templateUrl: './sign-up.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -24,6 +28,7 @@ export class SignUpComponent {
   private _authService = inject(AuthService);
 
   protected readonly FormatUtils = FormatUtils;
+  protected readonly ButtonUtils = ButtonUtils;
 
   isIdle = computed(() => this._state() === RequestStatus.IDLE);
   isLoading = computed(() => this._state() === RequestStatus.LOADING);
@@ -32,6 +37,8 @@ export class SignUpComponent {
   errorMessage = "";
 
   fieldActive = signal<string | null>(null);
+  email = "";
+  visible = false;
 
   registerForm = this._fb.group({
     company: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z0-9]+$/)]],
@@ -45,11 +52,6 @@ export class SignUpComponent {
     validators: [this.passwordMatchValidator()]
   })
 
-  disabledButton(){
-    const disabledClasses = "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
-    return (this.registerForm.valid && !this.isLoading()) ? "" : disabledClasses;
-  }
-
   passwordMatchValidator(): ValidatorFn {
     return (form: AbstractControl): ValidationErrors | null => {
       const password = form.get('password')?.value;
@@ -62,6 +64,7 @@ export class SignUpComponent {
   }
 
   submit(){
+    this.visible = false;
     if(!this.registerForm.valid) return;
 
     this._state.set(transition(this._state(), RequestEvent.SEND));
@@ -74,7 +77,7 @@ export class SignUpComponent {
       firstName: this.registerForm?.get("firstName")?.value?.toLowerCase() ?? "",
       maternalLastName: this.registerForm?.get("maternalLastName")?.value?.toLowerCase() ?? "",
       paternalLastName: this.registerForm?.get("paternalLastName")?.value?.toLowerCase() ?? "",
-      password: this.registerForm?.get("password")?.value?.toLowerCase() ?? "",
+      password: this.registerForm?.get("password")?.value ?? "",
     }
 
     const objSignup: SignupRequest = {
@@ -84,7 +87,10 @@ export class SignUpComponent {
 
     this._authService.postAuthSignup(objSignup).subscribe({
       next: () => {
+        this.email = this.registerForm.get("email")?.value || "correo@correo.com";
+        this.visible = true;
         this._state.set(transition(this._state(), RequestEvent.RESOLVE));
+        this.registerForm.reset();
       },
       error: (error) => {
         this.errorMessage = error?.error?.message ?? "Ocurrió un error al verificar al usuario, favor de contactar al area de sistemas";

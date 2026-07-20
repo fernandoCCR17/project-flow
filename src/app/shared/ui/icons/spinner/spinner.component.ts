@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-spinner',
+  selector: 'icon-spinner',
   imports: [],
   templateUrl: './spinner.component.html',
   styleUrl: './spinner.component.css',
