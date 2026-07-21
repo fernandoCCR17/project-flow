@@ -1,0 +1,24 @@
+<p-dialog 
+    [visible]="visible()" 
+    [modal]="true" 
+    [style]="{ width: '25rem' }"
+    (onHide)="onHide()"
+>
+    @if (header) {
+        <ng-template pTemplate="header">
+            <ng-content select="[dialogHeader]"></ng-content>
+        </ng-template>
+    }
+
+    @if (body) {
+        <ng-template pTemplate="body">
+            <ng-content select="[dialogBody]"></ng-content>
+        </ng-template>
+    }
+
+    @if (footer) {
+        <ng-template pTemplate="footer">
+            <ng-content select="[dialogFooter]"></ng-content>
+        </ng-template>
+    }
+</p-dialog>

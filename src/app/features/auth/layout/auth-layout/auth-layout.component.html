@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative min-h-svh flex flex-col">
     <div class="flex justify-center flex-col p-8">
         <div class="cursor-pointer mx-auto" routerLink="/">
             <div class="mx-auto w-16 h-16 bg-blue-700 text-black font-bold flex items-center justify-center rounded group-hover:bg-blue-900 transition">
@@ -13,8 +13,10 @@
         <p class="text-center text-gray-400">Simplify your workspace</p>
     </div>
 
-    <router-outlet></router-outlet>
-
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+    
     <button 
         type="button"
         class="group cursor-pointer p-2 rounded-full border border-blue-900 hover:bg-blue-900 transition absolute left-0 top-11   "

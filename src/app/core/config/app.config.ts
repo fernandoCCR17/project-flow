@@ -6,6 +6,7 @@ import Aura from '@primeuix/themes/aura';
 import { routes } from '../../app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { AppTitleStrategy } from './app-title.strategy';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
       provide: TitleStrategy,
       useClass: AppTitleStrategy
     },
+    MessageService,
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
     provideRouter(

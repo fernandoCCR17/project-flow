@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MessageComponent } from "@shared/ui/button/message/message.component";
+import { MessageComponent } from "@shared/ui/message/message.component";
 import { RouterLink } from "@angular/router";
 
 @Component({

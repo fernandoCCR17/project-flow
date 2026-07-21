@@ -1,0 +1,28 @@
+@if(isLoading()){
+    <div class="flex-1 flex items-center justify-center">
+        <loader-circle
+            [classes]="'h-28 w-28 absolute top-1/2 left-1/2 -translate-1/2'"
+        />
+    </div>
+}
+
+@if(isSuccess()){
+    <succeed-email-verify />
+}
+
+@if(isError()){
+    @if (["400", "404", "0"].includes(getStatusCode())) {
+        <general-error-verify-email/>
+    }
+
+    @if (getStatusCode() === "409") {
+        <already-verify-error-email [message]="message"/>
+    }
+
+    @if (getStatusCode() === "401") {
+        <link-expired-error [actionToken]="token ?? ''" />
+    }
+}
+
+
+

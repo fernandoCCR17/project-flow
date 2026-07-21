@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-eye',
+  selector: 'icon-eye',
   imports: [],
   templateUrl: './eye.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

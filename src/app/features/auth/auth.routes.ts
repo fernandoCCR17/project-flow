@@ -1,6 +1,5 @@
 import { Routes } from "@angular/router";
 import { LoginComponent } from "./pages/login/login.component";
-import { SignUpComponent } from "./pages/sign-up/sign-up.component";
 import { AuthLayoutComponent } from "./layout/auth-layout/auth-layout.component";
 
 const AuthRoutes: Routes = [
@@ -17,8 +16,14 @@ const AuthRoutes: Routes = [
                 path:'sign-up',
                 title: 'Crear Cuenta',
                 loadComponent: () => import('./pages/sign-up/sign-up.component').then(m => m.SignUpComponent)
+            },
+            {
+                path: 'verify-email/:actionToken',
+                title: 'Verificar Email',
+                loadComponent: () => import('./pages/verify-email/verify-email.component').then(m => m.VerifyEmailComponent)
             }
-        ]
+        ],
+
     },
     {
         path: '**',

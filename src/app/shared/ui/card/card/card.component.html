@@ -1,4 +1,4 @@
-<p-card [ngClass]="clases()" [style.background]="background()" [pt]="{ body: { style: { padding: '0', gap: '0' } }, content: { style: { padding: '0' } } }">
+<p-card [class]="clases()" [style.background]="background()" [pt]="{ body: { style: { padding: '0', gap: '0' } }, content: { style: { padding: '0' } } }">
   @if (header) {
     <ng-template pTemplate="header">
       <ng-content select="[cardHeader]"></ng-content>

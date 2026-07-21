@@ -1,0 +1,30 @@
+<app-card [clases]="'max-w-md mx-auto py-5 px-3 shadow-lg'">
+    <div cardHeader class="p-3 bg-gray-100 w-fit rounded-full mx-auto">
+        <icon-check-badge  [strokeName]="'#1447e6'" [className]="'size-11'"/>
+    </div>
+
+    <div cardBody class="p-5 text-center">
+        <h1 class="text-gray-700 text-center text-3xl font-semibold mb-4">Error al validar la información</h1>
+
+        <p class="text-gray-500 font-semibold">{{message()}}</p>
+        <!-- <p class="text-gray-400 text-sm">You can sign in using your credentials.</p> -->
+
+        <div class="flex flex-col gap-4 mt-14 font-bold">
+            <button 
+                type="button" 
+                class="bg-blue-700 hover:bg-blue-900 w-full text-white p-3 rounded-lg cursor-pointer"
+                routerLink="/auth/login"
+            >
+                Go to Login
+            </button>
+
+            <button 
+                type="button" 
+                class="hover:bg-gray-200 w-full text-gray-500 p-3 rounded-lg cursor-pointer border border-gray-300 transition"
+                routerLink="/"
+            >
+                Back to Home
+            </button>
+        </div>
+    </div>
+</app-card>

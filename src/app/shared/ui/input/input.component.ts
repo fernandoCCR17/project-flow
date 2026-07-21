@@ -11,7 +11,7 @@ import { EyeSlashComponent } from "../icons/eye-slash/eye-slash.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent{
-  label = input.required<string>();
+  label = input<string>();
   type = input.required<string>();
   placeholder = input.required<string>();
   control = input.required<FormControl>();

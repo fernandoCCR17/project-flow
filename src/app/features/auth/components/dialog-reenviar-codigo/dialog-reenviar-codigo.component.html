@@ -1,0 +1,33 @@
+<app-dialog [(visible)]="visible">
+    <h2 dialogHeader class="text-left uppercase font-bold">Reenviar código</h2>
+
+    <div dialogBody class="text-center">
+        <form [formGroup]="formReenviar" (submit)="submit()">
+            <app-input 
+                [control]="formReenviar.controls.email"
+                [placeholder]="'name@company.com'"
+                [type]="'email'"
+                [formatFuncion]="FormatUtils.textTrim"
+            />
+
+            @if(isSuccess()){
+                <p class="bg-green-100 border border-green-200 p-3 text-green-700 rounded-lg">
+                    Correo enviado con éxito
+                </p>
+            }
+
+            @if(isError()){
+                <p class="bg-red-100 border border-red-200 p-3 text-red-700 font-bold rounded-lg">
+                    {{errorMessage}}
+                </p>
+            }
+
+            <button 
+                type="submit"
+                class="bg-blue-700 hover:bg-blue-900 text-white rounded-lg py-2 w-full mt-3 cursor-pointer"
+                [disabled]="!formReenviar.valid || this.isLoading()"
+                [class]="ButtonUtils.isDisabledButton(!formReenviar.valid || this.isLoading())"
+            >Reenviar</button>
+        </form>
+    </div>
+</app-dialog>

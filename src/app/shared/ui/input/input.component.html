@@ -1,7 +1,9 @@
 <div class="mb-5">
-  <label class="font-bold mb-3 block text-gray-700">
-    {{ label() }}
-  </label>
+  @if (label()) {
+    <label class="font-bold mb-3 block text-gray-700">
+      {{ label() }}
+    </label>
+  }
 
   <div class="relative">
     <input
@@ -19,11 +21,11 @@
     @if(type() === 'password') {
       <div class="absolute right-0 top-1/2 -translate-1/2 cursor-pointer">
         @if (!showPassword){
-          <app-eye (click)="changeTypePassword()"/>
+          <icon-eye (click)="changeTypePassword()"/>
         }
     
         @if (showPassword){
-          <app-eye-slash (click)="changeTypePassword()"/>
+          <icon-eye-slash (click)="changeTypePassword()"/>
         }
       </div>
     }
